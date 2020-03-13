@@ -1,8 +1,18 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const morgan = require('morgan');
+var _widgets = require('./data/widgets_');
 
+
+app.use(cors());
 app.use(morgan('short'));
+
+app.get('/widget/:id', (req, res) => {
+  console.log("get with id :"+  req.params.id)
+
+  res.end();
+})
 
 app.get("/", (req, res) => {
     console.log('server sql respons'),
@@ -210,7 +220,8 @@ app.get("/widget", (req, res) => {
         }],
         "updated_at": "2019-07-17 10:48:31"
       };
-    res.json(widget)
+    console.log(_widgets);
+    res.json(_widgets.data.items)
     
     // res.send(' path to users')
 })
